@@ -1,5 +1,3 @@
-get_ipython().system('pip install gpt_2_simple')
-
 import gpt_2_simple as gpt2
 import os
 
