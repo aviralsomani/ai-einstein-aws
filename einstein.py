@@ -1,17 +1,31 @@
-import gpt_2_simple as gpt2
-import os
-
-seed = "hello"
-sess = gpt2.start_tf_sess()
-
-gpt2.load_gpt2(sess)
-text = gpt2.generate(sess,
-              length=500,
-              prefix=seed,
-              return_as_list=True)[0]
-
-print(text)
+import argparse
+import json
+from model import EinsteinModel
+import boto3
 
 
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--prompt", type=str, default='Hello')
+    parser.add_argument("--length", type=int, default=20)
+    parser.add_argument("--dynamoid", type=int, default=1)
+    args = parser.parse_args()
+
+    ein = EinsteinModel()
+    out = ein.generate(args.prompt, args.length)
+
+    dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
+    table = dynamodb.Table('Responses')
+
+    table.put_item(
+        Item={
+            'model': 'einstein',
+            'responseid': args.dynamoid,
+            'prompt': args.prompt,
+            'response': out
+        }
+    )
 
 
+if __name__ == '__main__':
+    main()
