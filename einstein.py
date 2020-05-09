@@ -20,7 +20,7 @@ def main():
     table.put_item(
         Item={
             'model': 'einstein',
-            'responseid': args.dynamoid,
+            'id': args.dynamoid,
             'prompt': args.prompt,
             'response': out
         }
