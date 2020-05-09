@@ -46,6 +46,7 @@ def lambda_handler(event, context):
                 "shutdown -h +30",
                 "sudo -i -u ubuntu back <<-EOF",
                 "source ~/.bachrc",
+                "source activate tensorflow_p36",
                 f"python einstein.py --prompt=\"{prompt}\" --dynamoid={dynamoid} --length={length}"]
 
     execute_commands_on_linux_instances(ssm_client, commands, [INSTANCE_ID])
