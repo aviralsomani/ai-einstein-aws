@@ -10,6 +10,6 @@ class EinsteinModel:
         text = gpt2.generate(self.sess, length=length, prefix=prompt, return_as_list=True)[0]
         text = text.replace('\\\'e2\\\'80\\\'99', '\'')
         text = text.replace('<|endoftext|>', '')
-        text = text.split('<|startoftext|>')[0]
+        text = text.split('<|startoftext|>')
         return text
 

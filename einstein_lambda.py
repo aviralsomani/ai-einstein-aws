@@ -2,8 +2,8 @@ import json, boto3, time
 from boto3.dynamodb.conditions import Key
 import uuid
 
-REGION = "INSERT REGION"
-INSTANCE_ID = "INSERT INSTANCE ID"
+REGION = "us-east-2"
+INSTANCE_ID = 'i-0b8a578a6347aff5c'
 ec2_client = boto3.client("ec2", region_name=REGION)
 ec2_resource = boto3.resource("ec2", region_name=REGION)
 dynamo_resource = boto3.resource("dynamodb", region_name=REGION)
@@ -28,7 +28,7 @@ def format_response(message, status_code):
     }
 
 def lambda_handler(event, context):
-    body = json.loads(event['body'])
+    body = json.loads(event["body"])
     prompt = body['prompt']
     length = body['length']
 
@@ -40,12 +40,9 @@ def lambda_handler(event, context):
     waiter = ec2_client.get_waiter('instance_status_ok')
     waiter.wait(InstanceIds=[INSTANCE_ID])
 
-    dynamoid = uuid.uuid4()
+    dynamoid = str(uuid.uuid4())
 
-    commands = ["cd /home/ubuntu",
-                "shutdown -h +30",
-                "sudo -i -u ubuntu back <<-EOF",
-                "source ~/.bachrc",
+    commands = ["cd git/ai-eintstein-aws/",
                 "source activate tensorflow_p36",
                 f"python einstein.py --prompt=\"{prompt}\" --dynamoid={dynamoid} --length={length}"]
 

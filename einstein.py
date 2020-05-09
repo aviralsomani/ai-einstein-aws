@@ -12,7 +12,7 @@ def main():
     args = parser.parse_args()
 
     ein = EinsteinModel()
-    out = ein.generate(args.prompt, args.length)
+    out = str(ein.generate(args.prompt, args.length))
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
     table = dynamodb.Table('Responses')
