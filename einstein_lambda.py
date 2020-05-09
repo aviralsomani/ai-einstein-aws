@@ -49,3 +49,16 @@ def lambda_handler(event, context):
                 f"python einstein.py --prompt=\"{prompt}\" --dynamoid={dynamoid} --length={length}"]
 
     execute_commands_on_linux_instances(ssm_client, commands, [INSTANCE_ID])
+
+    table = dynamo_resource.Table('Responses')
+    timeout = time.time() + 60*2
+    while True:
+        resp = table.query(KeyConditionExpression=Key('id').eq(dynamoid))
+        if len(resp['Items']) > 0 or time.time() > timeout:
+            break
+        time.sleep(3)
+
+    print("The query returned the following items:")
+    print(resp['Items'])
+
+    return format_response(resp['Items'][0]['response'], 200)
