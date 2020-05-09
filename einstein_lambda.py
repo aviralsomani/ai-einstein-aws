@@ -2,8 +2,8 @@ import json, boto3, time
 from boto3.dynamodb.conditions import Key
 import uuid
 
-REGION = "INSERT_REGION"
-INSTANCE_ID = "INSERT ID"
+REGION = "us-east-2"
+INSTANCE_ID = "i-0b8a578a6347aff5c"
 ec2_client = boto3.client("ec2", region_name=REGION)
 ec2_resource = boto3.resource("ec2", region_name=REGION)
 dynamo_resource = boto3.resource("dynamodb", region_name=REGION)
