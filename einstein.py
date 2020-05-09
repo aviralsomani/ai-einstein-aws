@@ -8,7 +8,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--prompt", type=str, default='Hello')
     parser.add_argument("--length", type=int, default=20)
-    parser.add_argument("--dynamoid", type=int, default=1)
+    parser.add_argument("--dynamoid", type=str, default=1)
     args = parser.parse_args()
 
     ein = EinsteinModel()
