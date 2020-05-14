@@ -2,8 +2,8 @@ import json, boto3, time
 from boto3.dynamodb.conditions import Key
 import uuid
 
-REGION = "us-east-2"
-INSTANCE_ID = 'i-0b8a578a6347aff5c'
+REGION = "REGION"
+INSTANCE_ID = 'ID'
 ec2_client = boto3.client("ec2", region_name=REGION)
 ec2_resource = boto3.resource("ec2", region_name=REGION)
 dynamo_resource = boto3.resource("dynamodb", region_name=REGION)
@@ -43,12 +43,13 @@ def lambda_handler(event, context):
     dynamoid = str(uuid.uuid4())
 
     commands = ["cd git/ai-eintstein-aws/",
+                "sudo mkdir IWASHERE",
                 "source activate tensorflow_p36",
                 f"python einstein.py --prompt=\"{prompt}\" --dynamoid={dynamoid} --length={length}"]
 
     execute_commands_on_linux_instances(ssm_client, commands, [INSTANCE_ID])
 
-    table = dynamo_resource.Table('Responses')
+    table = dynamo_resource.Table('gpt2_responses')
     timeout = time.time() + 60*2
     while True:
         resp = table.query(KeyConditionExpression=Key('id').eq(dynamoid))

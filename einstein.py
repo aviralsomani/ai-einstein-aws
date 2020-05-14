@@ -1,5 +1,4 @@
 import argparse
-import json
 from model import EinsteinModel
 import boto3
 
@@ -15,7 +14,7 @@ def main():
     out = str(ein.generate(args.prompt, args.length))
 
     dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
-    table = dynamodb.Table('Responses')
+    table = dynamodb.Table('gpt2_responses')
 
     table.put_item(
         Item={
