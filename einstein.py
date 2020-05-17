@@ -1,10 +1,13 @@
+import os
+os.system("source activate tensorflow_p36")
+
 import argparse
 import os
 from model import EinsteinModel
 import boto3
 import datetime
 
-os.system("source activate tensorflow_p36")
+
 
 def main():
     parser = argparse.ArgumentParser()
