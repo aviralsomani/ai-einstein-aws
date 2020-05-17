@@ -1,6 +1,5 @@
 import gpt_2_simple as gpt2
 
-
 class EinsteinModel:
     def __init__(self):
         self.sess = gpt2.start_tf_sess()

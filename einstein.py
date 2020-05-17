@@ -1,6 +1,9 @@
+!source activate tensorflow_p36
+
 import argparse
 from model import EinsteinModel
 import boto3
+import datetime
 
 
 def main():
@@ -20,6 +23,7 @@ def main():
         Item={
             'model': 'einstein',
             'id': args.dynamoid,
+            'timestamp': str(datetime.datetime.now()),
             'prompt': args.prompt,
             'response': out
         }
