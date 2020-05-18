@@ -24,7 +24,7 @@ def check_mentions(api, since_id):
 
 def get_response(text):
     url = "https://tayrkn1vpc.execute-api.us-east-2.amazonaws.com/beta/"
-    params = {"body": f"{{\"prompt\": \"{text}\", \"length\": {80} }}"}
+    params = {"body": f"{{\"prompt\": \"{text}\", \"length\": {60} }}"}
     resp = post(url=url, data=json.dumps(params, separators=(',', ':')))
     return resp.json()['body'].replace('\"', '').replace('[', '').replace(']', '').replace('\\', '')
 
