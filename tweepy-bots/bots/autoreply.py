@@ -14,6 +14,8 @@ def check_mentions(api, since_id):
     new_since_id = since_id
     for tweet in tweepy.Cursor(api.mentions_timeline,
                                since_id=since_id).items():
+        logger.info(f"Tweet id: {tweet.id}\tSince ID: {new_since_id}")
+        logger.info(f"Message: {tweet.text}")
         if tweet.id > new_since_id:
             prompt = str(tweet.text).replace('@ai_einstein', '')
             api.update_status(
