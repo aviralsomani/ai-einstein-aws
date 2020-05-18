@@ -14,13 +14,14 @@ def check_mentions(api, since_id):
     new_since_id = since_id
     for tweet in tweepy.Cursor(api.mentions_timeline,
                                since_id=since_id).items():
-        new_since_id = max(tweet.id, new_since_id)
-        prompt = str(tweet.text).replace('@ai_einstein', '')
-        api.update_status(
-            status=str(get_response(prompt)),
-            in_reply_to_status_id=tweet.id,
-            auto_populate_reply_metadata=True
-        )
+        if tweet.id > new_since_id:
+            prompt = str(tweet.text).replace('@ai_einstein', '')
+            api.update_status(
+                status=str(get_response(prompt)),
+                in_reply_to_status_id=tweet.id,
+                auto_populate_reply_metadata=True
+            )
+            new_since_id = tweet.id
     return new_since_id
 
 
