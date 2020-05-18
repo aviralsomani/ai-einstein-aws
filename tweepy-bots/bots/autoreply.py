@@ -16,10 +16,10 @@ def check_mentions(api, since_id):
                                since_id=since_id).items():
         new_since_id = max(tweet.id, new_since_id)
         prompt = str(tweet.text).replace('@ai_einstein', '')
-        resp = str(get_response(prompt))
         api.update_status(
             status=str(get_response(prompt)),
-            in_reply_to_status_id=tweet.id
+            in_reply_to_status_id=tweet.id,
+            auto_populate_reply_metadata=True
         )
     return new_since_id
 
@@ -28,7 +28,7 @@ def get_response(text):
     url = "https://tayrkn1vpc.execute-api.us-east-2.amazonaws.com/beta/"
     params = {"body": f"{{\"prompt\": \"{text}\", \"length\": {80} }}"}
     resp = post(url=url, data=json.dumps(params, separators=(',', ':')))
-    to_ret = resp.json()['body'].replace('\"', '').replace('[', '').replace(']', '').replace('\\', '').replace('@ai_einstein', '').replace(f'{text} ', '')
+    to_ret = resp.json()['body'].replace('\"', '').replace('[', '').replace(']', '').replace('\\', '').replace('@ai_einstein', '').replace(f'{text} ', '').replace('\'','')
     to_ret = to_ret[:280] if len(to_ret) >= 280 else to_ret
     ind = to_ret.rfind('.')
     return to_ret[:ind+1]
