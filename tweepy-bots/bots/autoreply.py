@@ -16,6 +16,7 @@ def check_mentions(api, since_id):
                                since_id=since_id).items():
         logger.info(f"Tweet id: {tweet.id}\tSince ID: {new_since_id}")
         logger.info(f"Message: {tweet.text}")
+        logger.info(f"{tweet.id > new_since_id}")
         if tweet.id > new_since_id:
             prompt = str(tweet.text).replace('@ai_einstein', '')
             api.update_status(
