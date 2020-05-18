@@ -1,5 +1,5 @@
 import os
-os.system("source activate tensorflow_p36")
+
 
 import argparse
 import os

@@ -1,3 +1,6 @@
+import os
+os.system("source activate tensorflow_p36")
+
 import gpt_2_simple as gpt2
 
 class EinsteinModel:
