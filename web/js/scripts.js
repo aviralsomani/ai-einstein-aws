@@ -6,7 +6,7 @@ window.addEventListener("load", function () {
         var inputs = document.getElementById("promptForm").elements;
 
         var prompt = inputs["prompt"].value
-        var length = inputs["length"].value
+        var length = inputs["response_size"].value
 
         var data = {
             "body": `{\"prompt\": \"${prompt}\", \"length\": ${length}, \"source\": \"web\"}`
