@@ -9,11 +9,11 @@
     <p>Hear straight from ol' Al himself.</p>
     <form id="promptForm">
         <label for="user">Your name? (Doesn't have to be real)</label><br />
-        <input id="user_name" placeholder="Your Name?" /><br /><br />
+        <input id="user_name" placeholder="Your Name?" required/><br /><br />
         <label for="seed">Give Einstein a prompt to talk about</label><br />
-        <input id="prompt" placeholder="Ask a question, give a prompt, etc." /><br /><br />
+        <input id="prompt" placeholder="Ask a question, give a prompt, etc." required/><br /><br />
         <label for="len">How many words do you want the response to be (Between 20 and 200)?</label><br />
-        <input id="response_size" min="20" max="200" type="number"/>
+        <input id="response_size" min="20" max="200" type="number" required/>
         <br /><br />
         <input type="submit" value="Hear from Al" />
         <p><span id='display'></span></p>
