@@ -7,6 +7,9 @@ window.addEventListener("load", function () {
 
         var prompt = inputs["prompt"].value
         var length = inputs["response_size"].value
+        var uname = inputs["user_name"].value
+
+        prompt = "Dear " + uname + ", " + prompt
 
         var data = {
             "body": `{\"prompt\": \"${prompt}\", \"length\": ${length}, \"source\": \"web\"}`
