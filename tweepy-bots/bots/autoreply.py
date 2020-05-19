@@ -18,9 +18,8 @@ def check_mentions(api, since_id):
         logger.info(f"Message: {tweet.text}")
         logger.info(f"{tweet.id > new_since_id}")
         if tweet.id > new_since_id:
-            prompt = str(tweet.text).replace('@ai_einstein', '')
             api.update_status(
-                status=str(get_response(prompt)),
+                status=str(get_response(tweet)),
                 in_reply_to_status_id=tweet.id,
                 auto_populate_reply_metadata=True
             )
@@ -28,11 +27,11 @@ def check_mentions(api, since_id):
     return new_since_id
 
 
-def get_response(text):
+def get_response(tweet):
     url = "https://tayrkn1vpc.execute-api.us-east-2.amazonaws.com/beta/"
-    params = {"body": f"{{\"prompt\": \"{text}\", \"length\": {80} }}"}
+    params = {"body": f"{{\"prompt\": \"{str(tweet.text).replace('@ai_einstein', '')}\", \"length\": {80}, \"source\": \"twitter\"}}"}
     resp = post(url=url, data=json.dumps(params, separators=(',', ':')))
-    to_ret = resp.json()['body'].replace('\"', '').replace('[', '').replace(']', '').replace('\\', '').replace('@ai_einstein', '').replace(f'{text} ', '').replace('\'','')
+    to_ret = resp.json()['body'].replace('\"', '').replace('[', '').replace(']', '').replace('\\', '').replace('@ai_einstein', '').replace(f'{tweet.text} ', '').replace('\'','')
     to_ret = to_ret[:280] if len(to_ret) >= 280 else to_ret
     ind = to_ret.rfind('.')
     return to_ret[:ind+1]
@@ -40,7 +39,7 @@ def get_response(text):
 
 def main():
     api = create_api()
-    since_id = 1
+    since_id = 1262491407455002632
     while True:
         since_id = check_mentions(api, since_id)
         logger.info('Waiting...')

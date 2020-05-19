@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 
 <head>
-  <script type="text/javascript" src="js/scripts.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
 </head>
 
 <body>
-  <h1>Talk To Einstein</h1>
-  <p>Hear straight from ol' Al himself.</p>
-
-  <form id="promptForm">
-    <label for="seed">Give Einstein a prompt to talk about</label><br /><br />
-    <input id="prompt" placeholder="Ask a question, give a prompt, etc."></input>
-    <br /><br />
-    <input type="submit" value="Hear from Al" />
-
-    <p><span id='display'></span></p>
-  </form>
-</body>
+    <h1>Talk To Einstein</h1>
+    <p>Hear straight from ol' Al himself.</p>
+    <form id="promptForm">
+        <label for="seed">Give Einstein a prompt to talk about</label><br /><br />
+        <input id="prompt" placeholder="Ask a question, give a prompt, etc." />
+        <label for="len">How many words do you want the response to be?</label>"
+        <input id="length" type="range" min="20" max="200" class="slider"/>
+        <br /><br />
+        <input type="submit" value="Hear from Al" />
+        <p><span id='display'></span></p>
+    </form>
+</body> 

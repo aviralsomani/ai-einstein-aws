@@ -6,9 +6,10 @@ window.addEventListener("load", function () {
         var inputs = document.getElementById("promptForm").elements;
 
         var prompt = inputs["prompt"].value
+        var length = inputs["length"].value
 
         var data = {
-            "body": `{\"prompt\": \"${prompt}\", \"length\": 50}`
+            "body": `{\"prompt\": \"${prompt}\", \"${length}\": 50, \"source\": \"web\"}`
         };
 
         XHR.addEventListener("load", function (event) {

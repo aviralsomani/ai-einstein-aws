@@ -14,6 +14,7 @@ def main():
     parser.add_argument("--prompt", type=str, default='Hello')
     parser.add_argument("--length", type=int, default=20)
     parser.add_argument("--dynamoid", type=str, default=1)
+    parser.add_argument("--source", type=str, default='Web')
     args = parser.parse_args()
 
     ein = EinsteinModel()
@@ -28,7 +29,8 @@ def main():
             'id': args.dynamoid,
             'timestamp': str(datetime.datetime.now()),
             'prompt': args.prompt,
-            'response': out
+            'response': out,
+            'source': args.source
         }
     )
 
