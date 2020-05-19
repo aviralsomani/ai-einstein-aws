@@ -9,7 +9,7 @@ window.addEventListener("load", function () {
         var length = inputs["length"].value
 
         var data = {
-            "body": `{\"prompt\": \"${prompt}\", \"${length}\": 50, \"source\": \"web\"}`
+            "body": `{\"prompt\": \"${prompt}\", \"length\": ${length}, \"source\": \"web\"}`
         };
 
         XHR.addEventListener("load", function (event) {
