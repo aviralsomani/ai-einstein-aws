@@ -30,7 +30,7 @@ def check_mentions(api, since_id):
 
 def get_response(tweet):
     url = "https://tayrkn1vpc.execute-api.us-east-2.amazonaws.com/beta/"
-    params = {"body": f"{{\"prompt\": \"{str(tweet.text).replace('@ai_einstein', '')}\", \"length\": {80}, \"source\": \"twitter\"}}"}
+    params = {"body": f"{{\"prompt\": \"{str(tweet.text).replace('@ai_einstein', '')}\", \"length\": {80}, \"source\": \"twitter\", \"id\": \"{str(tweet.id)}\"}}"}
     resp = post(url=url, data=json.dumps(params, separators=(',', ':')))
     to_ret = resp.json()['body'].replace('\"', '').replace('[', '').replace(']', '').replace('\\', '').replace('@ai_einstein', '').replace(f'{tweet.text} ', '').replace('\'','')
     to_ret = to_ret[:280] if len(to_ret) >= 280 else to_ret
