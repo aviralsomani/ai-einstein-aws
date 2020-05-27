@@ -10,9 +10,10 @@ class EinsteinModel:
         gpt2.load_gpt2(self.sess, checkpoint_dir=self.checkpoint_dir)
 
     def generate(self, prompt='Hello', length=500):
-        text = gpt2.generate(self.sess, length=length, checkpoint_dir=self.checkpoint_dir, prefix=prompt, return_as_list=True)[0]
-        text = text.replace('\\\'e2\\\'80\\\'99', '\'')
-        text = text.replace('<|endoftext|>', '')
-        text = text.split('<|startoftext|>')
-        return text
+        texts = gpt2.generate(self.sess, length=length, checkpoint_dir=self.checkpoint_dir, prefix=prompt, return_as_list=True)
+        for text in texts:
+            text = text.replace('\\\'e2\\\'80\\\'99', '\'')
+            text = text.replace('<|endoftext|>', '')
+            text = text.split('<|startoftext|>')
+        return texts
 
