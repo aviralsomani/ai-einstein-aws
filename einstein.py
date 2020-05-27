@@ -23,6 +23,8 @@ def main():
     dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
     table = dynamodb.Table('gpt2_responses')
 
+    resp_status = 0 if args.source == "twitter" else 1
+
     table.put_item(
         Item={
             'model': 'einstein',
@@ -30,8 +32,8 @@ def main():
             'timestamp': str(datetime.datetime.now()),
             'prompt': args.prompt,
             'response': out,
-            'source': args.source
-            'responded': 0 if args.source == "twitter" else 1
+            'source': args.source,
+            'responded': resp_status
         }
     )
 
