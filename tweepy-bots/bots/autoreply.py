@@ -18,11 +18,12 @@ def check_mentions(api, since_id):
         logger.info(f"Message: {tweet.text}")
         logger.info(f"{tweet.id > new_since_id}")
         if tweet.id > new_since_id:
-            api.update_status(
-                status=str(get_response(tweet)),
-                in_reply_to_status_id=tweet.id,
-                auto_populate_reply_metadata=True
-            )
+            logger.info(get_response(tweet))
+            # api.update_status(
+            #     status=str(get_response(tweet)),
+            #     in_reply_to_status_id=tweet.id,
+            #     auto_populate_reply_metadata=True
+            # )
             new_since_id = tweet.id
     return new_since_id
 
